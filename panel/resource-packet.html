@@ -1,0 +1,191 @@
+<link rel="import" href="packages://ui-kit/widget/index.html">
+
+<dom-module id="editor-resource-packet">
+    <link rel="import" type="css" href="resource-packet.css">
+    <style>
+        .resource-packet-config {
+            margin: 0;
+            padding: 0;
+        }
+
+        .resource-packet-config li {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+            font-size: 12px;
+            box-sizing: border-box;
+            min-height: 24px;
+            margin-bottom: 5px;
+            color: #aaa;
+        }
+
+        .resource-packet-float-left {
+            flex: 1;
+        }
+
+        .resource-packet-float-left span{
+            margin: 0 10px 0 15px;
+            display:block;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+
+        .resource-packet-float-right {
+            flex: 2;
+        }
+        
+        .resource-packet-design-resolution{
+            display: flex;
+        }
+
+        .resource-packet-design-resolution editor-unit-input{
+            flex: 1;
+        }
+
+        .resource-packet-design-resolution editor-select{
+            flex: 2;
+        }
+    </style>
+    <template>
+
+
+        <editor-section text="Config">
+
+            <ul class="resource-packet-config">
+
+                <li>
+                    <div class="resource-packet-float-left">
+                        <span>name</span>
+                    </div>
+                    <div class="resource-packet-float-right">
+                        <editor-input placeholder="Default name"></editor-input>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="resource-packet-float-left">
+                        <span>package name</span>
+                    </div>
+                    <div class="resource-packet-float-right">
+                        <editor-input placeholder="Default package name"></editor-input>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="resource-packet-float-left">
+                        <span>version name</span>
+                    </div>
+                    <div class="resource-packet-float-right">
+                        <editor-input placeholder="Default version name"></editor-input>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="resource-packet-float-left">
+                        <span>version code</span>
+                    </div>
+                    <div class="resource-packet-float-right">
+                        <editor-input placeholder="Default version code"></editor-input>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="resource-packet-float-left">
+                        <span>runtime version</span>
+                    </div>
+                    <div class="resource-packet-float-right">
+                        <editor-input placeholder="Default runtime version"></editor-input>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="resource-packet-float-left">
+                        <span>description</span>
+                    </div>
+                    <div class="resource-packet-float-right">
+                        <editor-input placeholder="Default description"></editor-input>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="resource-packet-float-left">
+                        <span>orientation</span>
+                    </div>
+                    <div class="resource-packet-float-right">
+                        <editor-input placeholder="Default orientation"></editor-input>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="resource-packet-float-left">
+                        <span>entry file</span>
+                    </div>
+                    <div class="resource-packet-float-right">
+                        <editor-input placeholder="Default entry file"></editor-input>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="resource-packet-float-left">
+                        <span>design resolution</span>
+                    </div>
+                    <div class="resource-packet-float-right">
+                        <div class="resource-packet-design-resolution">
+                            <editor-unit-input hint="x"></editor-unit-input>
+                            <editor-unit-input hint="y"></editor-unit-input>
+                            <editor-select value="UNKNOWN">
+                                <editor-option value="EXACT_FIT">EXACT_FIT</editor-option>
+                                <editor-option value="NO_BORDER">NO_BORDER</editor-option>
+                                <editor-option value="SHOW_ALL">SHOW_ALL</editor-option>
+                                <editor-option value="FIXED_HEIGHT">FIXED_HEIGHT</editor-option>
+                                <editor-option value="FIXED_WIDTH">FIXED_WIDTH</editor-option>
+                                <editor-option value="UNKNOWN">UNKNOWN</editor-option>
+                            </editor-select>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </editor-section>
+
+    </template>
+</dom-module>
+
+<script type="text/javascript" src="resource-packet.js"></script>
+<script>
+    (function(){
+
+        return {
+            "game_name": "≤‚ ‘¿˝v3",
+            "package_name": "org.cocos2dx.unittest.v3",
+            "version_name": "3.0.0",
+            "version_code": 3,
+            "runtime_version": "3.3.0.13",
+            "description": "≤‚ ‘¿˝v3∞Ê±æ",
+            "orientation": "landscape",
+            "entry_file": "main.js",
+            "design_resolution": {
+                "width": 1136,
+                "height": 640,
+                "policy": "SHOW_ALL"
+            },
+            "security": {
+                "third_party": {
+                    "chukong": {
+                        "app_id": "373364737"
+                    },
+                    "baidu":{
+                        "sp_no":"1003",
+                        "return_url":"http://115.28.72.132:8080/BaiduOrderTest/BaiduPayResult",
+                        "page_url":"http://www.cocos2d-x.org",
+                        "secret_key":"3BT8fjxvsJFNDPZmd6QywMYrS7CXEK1i"
+                    }
+                },
+                "password":"unittest"
+            }
+        }
+    })();
+</script>

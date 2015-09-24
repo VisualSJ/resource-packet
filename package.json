@@ -1,0 +1,40 @@
+{
+  "name": "resource-packet",
+  "version": "0.0.1",
+  "description": "A Resource packet tools",
+  "author": "VisualSJ",
+  "hosts": {
+    "editor-framework": "^0.3.15",
+    "engine-framework": "^0.1.2"
+  },
+  "main": "main.js",
+  "menus": {
+    "Panel/Resource Packet": {
+      "icon": "panel/icon.png",
+      "message": "resource-packet:open"
+    }
+  },
+  "panels": {
+    "panel": {
+      "frame": "panel/resource-packet.html",
+      "type": "dockable",
+      "title": "Resource Packet",
+      "icon": "panel/icon.png",
+      "width": "auto",
+      "height": "auto",
+      "shortcuts": {
+      },
+      "messages": [
+      ],
+      "profiles": {
+        "local": {
+          "designWidth": 640,
+          "designHeight": 480
+        }
+      }
+    }
+  },
+  "tests": [
+    "test/basic.html"
+  ]
+}
