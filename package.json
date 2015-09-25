@@ -25,6 +25,7 @@
       "shortcuts": {
       },
       "messages": [
+        "resource-packet:set-config"
       ],
       "profiles": {
         "local": {
