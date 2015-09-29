@@ -2,40 +2,55 @@ var Fs = require("fs");
 var Path = require("path");
 var ConfigTemplate = require("./template/config.js");
 
-//¶¨ÒåÒ»Ğ©ÅäÖÃµÄ±äÁ¿
+//å®šä¹‰ä¸€äº›é…ç½®çš„å˜é‡
 const configName = "packet-config.json";
-const groupName = "packet-group.json";
 
-var SettingsDir;//¹¤³ÌÄ¿Â¼ÏÂµÄsettingsÄ¿Â¼
-var configJson;//configÎÄ¼şµÄ¾ø¶ÔÂ·¾¶
-var groupJson;//groupÎÄ¼şµÄ¾ø¶ÔÂ·¾¶
+var SettingsDir;//å·¥ç¨‹ç›®å½•ä¸‹çš„settingsç›®å½•
+var configJson;//configæ–‡ä»¶çš„ç»å¯¹è·¯å¾„
 
-var config = {};
-//var data = Fs.readFileSync(Editor.url('./config.json'), {encoding:'utf8'});
+var config = null;
+
+var checkPath = function(){
+    if(!SettingsDir)
+        SettingsDir = Editor. _type2profilepath.project;
+    if(!configJson)
+        configJson = Path.join(SettingsDir, configName);
+};
 
 var updateConfig = function(){
-    if(Fs.existsSync(configJson)){
-        //ÎÄ¼ş´æÔÚ
-        console.log("read %s", configJson);
-    }else{
-        //ÅäÖÃÎÄ¼ş²»´æÔÚ£¬´´½¨ÅäÖÃ
+    if(!Fs.existsSync(configJson)){
+        //é…ç½®æ–‡ä»¶ä¸å­˜åœ¨ï¼Œåˆ›å»ºé…ç½®
         console.log("create %s", configJson);
+        if(!config)
+            config = ConfigTemplate;
         Fs.writeFileSync(configJson, JSON.stringify(config));
+        console.log(config);
+    }else{
+        console.log("read %s", configJson);
+        config = Fs.readFileSync(configJson);
+        config = JSON.parse(config);
     }
 };
 
 module.exports = {
-    'resource-packet:open': function(){
-        if(!SettingsDir)
-            SettingsDir = Editor. _type2profilepath.project;
-        if(!configJson)
-            configJson = Path.join(SettingsDir, configName);
-        if(!groupJson)
-            groupJson = Path.join(SettingsDir, groupName);
-        Editor.Panel.open('resource-packet.panel');
+
+    'resource-config:open': function(){
+        checkPath();
+        Editor.Panel.open('resource-config.panel');
     },
-    'resource-packet:set-config': function(){
+
+    'resource-config:load-config': function(){
+        checkPath();
         updateConfig();
-        Editor.sendToPanel('resource-packet.panel', 'resource-packet:set-config', config);
+        Editor.sendToPanel('resource-config.panel', 'resource-config:set-config', config);
+    },
+
+    'resource-config:save-config': function(config){
+        checkPath();
+        if(configJson){
+            console.log("save %s", configJson);
+            //console.log(config);
+            Fs.writeFileSync(configJson, JSON.stringify(config));
+        }
     }
 };
