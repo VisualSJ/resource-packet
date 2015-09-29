@@ -1,0 +1,48 @@
+.resource-config-config {
+    margin: 0;
+    padding: 10px 10px 15px 0;
+    position: relative;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.resource-config-config li {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    font-size: 12px;
+    box-sizing: border-box;
+    min-height: 24px;
+    margin-bottom: 5px;
+    color: #aaa;
+}
+
+.resource-config-float-left {
+    flex: 1;
+}
+
+.resource-config-float-left span{
+    margin: 0 10px 0 15px;
+    display:block;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.resource-config-float-right {
+    flex: 2;
+}
+
+.resource-config-design-resolution{
+    display: flex;
+}
+
+.resource-config-design-resolution editor-unit-input{
+    flex: 1;
+}
+
+.resource-config-design-resolution editor-select{
+    flex: 2;
+}

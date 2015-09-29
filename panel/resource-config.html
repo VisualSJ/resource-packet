@@ -1,0 +1,159 @@
+<link rel="import" href="packages://ui-kit/widget/index.html">
+
+<dom-module id="editor-resource-config">
+    <link rel="import" type="css" href="resource-config.css">
+    <template>
+        <ul class="resource-config-config">
+
+            <li>
+                <div class="resource-config-float-left">
+                    <span>游戏名称</span>
+                </div>
+                <div class="resource-config-float-right">
+                    <editor-input on-keyup="_changeConfig" placeholder="请输入游戏名称" input-value="{{config.game_name}}"></editor-input>
+                </div>
+            </li>
+
+            <li>
+                <div class="resource-config-float-left">
+                    <span>游戏包名</span>
+                </div>
+                <div class="resource-config-float-right">
+                    <editor-input on-keyup="_changeConfig" placeholder="请输入包名" input-value="{{config.package_name}}"></editor-input>
+                </div>
+            </li>
+
+            <li>
+                <div class="resource-config-float-left">
+                    <span>版本名</span>
+                </div>
+                <div class="resource-config-float-right">
+                    <editor-input on-keyup="_changeConfig" placeholder="请输入版本名" input-value="{{config.version_name}}"></editor-input>
+                </div>
+            </li>
+
+            <!--
+            版本号为大于0的整数
+            在每次发布版本的时候自动加1
+            <li>
+                <div class="resource-config-float-left">
+                    <span>version code</span>
+                </div>
+                <div class="resource-config-float-right">
+                    <editor-input on-keypress="_changeConfig" placeholder="Default version code" input-value="{{config.version_code}}"></editor-input>
+                </div>
+            </li>
+            -->
+
+            <li>
+                <div class="resource-config-float-left">
+                    <span>runtime版本</span>
+                </div>
+                <div class="resource-config-float-right">
+                    <editor-input on-keyup="_changeConfig" placeholder="请输入runtime版本" input-value="{{config.runtime_version}}"></editor-input>
+                </div>
+            </li>
+
+            <li>
+                <div class="resource-config-float-left">
+                    <span>描述信息</span>
+                </div>
+                <div class="resource-config-float-right">
+                    <editor-input on-keyup="_changeConfig" placeholder="请输入描述信息" input-value="{{config.description}}"></editor-input>
+                </div>
+            </li>
+
+            <li>
+                <div class="resource-config-float-left">
+                    <span>屏幕方向</span>
+                </div>
+                <div class="resource-config-float-right">
+                    <editor-select value="{{config.orientation}}">
+                        <editor-option value="portrait" on-click="_changeConfig">portrait</editor-option>
+                        <editor-option value="landscape" on-click="_changeConfig">landscape</editor-option>
+                        <!--
+                        <editor-option value="reverse_portrait" on-click="_changeConfig">reverse_portrait</editor-option>
+                        <editor-option value="reverse_landscape" on-click="_changeConfig">reverse_landscape</editor-option>
+                        -->
+                    </editor-select>
+                </div>
+            </li>
+
+            <li>
+                <div class="resource-config-float-left">
+                    <span>入口文件</span>
+                </div>
+                <div class="resource-config-float-right">
+                    <editor-input on-keyup="_changeConfig" placeholder="请输入入口文件" input-value="{{config.entry_file}}"></editor-input>
+                </div>
+            </li>
+
+            <li>
+                <div class="resource-config-float-left">
+                    <span>设计分辨率</span>
+                </div>
+                <div class="resource-config-float-right">
+                    <div class="resource-config-design-resolution">
+                        <editor-unit-input hint="w" input-value="{{config.design_resolution.width}}"></editor-unit-input>
+                        <editor-unit-input hint="h" input-value="{{config.design_resolution.height}}"></editor-unit-input>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="resource-config-float-left">
+                    <span>适配模式</span>
+                </div>
+                <div class="resource-config-float-right">
+                    <div class="resource-config-design-resolution">
+                        <editor-select value="{{config.design_resolution.policy}}">
+                            <editor-option value="EXACT_FIT" on-click="_changeConfig">EXACT_FIT</editor-option>
+                            <editor-option value="NO_BORDER" on-click="_changeConfig">NO_BORDER</editor-option>
+                            <editor-option value="SHOW_ALL" on-click="_changeConfig">SHOW_ALL</editor-option>
+                            <editor-option value="FIXED_HEIGHT" on-click="_changeConfig">FIXED_HEIGHT</editor-option>
+                            <editor-option value="FIXED_WIDTH" on-click="_changeConfig">FIXED_WIDTH</editor-option>
+                            <editor-option value="UNKNOWN" on-click="_changeConfig">UNKNOWN</editor-option>
+                        </editor-select>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </template>
+</dom-module>
+
+<script type="text/javascript">
+    (function () {
+        var timer = null;
+        Editor.registerPanel('resource-config.panel', {
+            is: 'editor-resource-config',
+
+            properties: {
+                test: {
+                    type: String
+                }
+            },
+
+            ready: function () {
+                Editor.sendToCore('resource-config:load-config');
+            },
+
+            reload: function () {
+            },
+
+            _changeConfig: function () {
+                clearTimeout(timer);
+                var self = this;
+                timer = setTimeout(function () {
+                    //用户修改了页面设置，发送保存请求
+                    //console.log(self.config);
+                    Editor.sendToCore('resource-config:save-config', self.config);
+                }, 500);
+            },
+
+            'resource-config:set-config': function (config) {
+                this.config = config;
+                //console.log(config);
+            }
+        });
+    })();
+</script>
